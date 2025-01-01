@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #popup_overlay {
+            top: 50%;
+            left: 50%;
+            padding: 15px;
+            width: 90%;
+            max-width: 800px;
+            background-color: rgba(0, 160, 255, 0.46);
+            justify-content: center;
+            transform: translate(-50%, -50%);
+            display: flex;
+            position: fixed;
+            border-radius: 10px;
+        }
+    
+        #popup {
+            border-right: auto;
+            border-left: auto;
+            width: 250px;
+            padding: 5%;
+            display: flex;
+            background-color: azure;
+            border-radius: 15px;
+            justify-content: space-between;
+        }
+
+        .form_element {
+            font-family: sans-serif;
+            border-radius: 5px;
+            border-color: cadetblue;
+        }
+
+        #cancel {
+            margin-left: auto;
+        }
+
+        label {
+            display: flex;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="popup_overlay">
+        <div id="popup">
+            <form id="new_post">
+                <div class="form_element">
+                    <label for="pfp">Profile Picture<button id="cancel">X</button></label>
+                    <select id="pfp" name="pfp" class="form_element">
+                        <option>Faen</option>
+                        <option>Friena</option>
+                        <option>Indigo</option>
+                        <option>Mailas</option>
+                        <option>Ise</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form_element">
+                    <label for="pfp">Username</label>
+                    <input type="text" id="at" name="at" placeholder="Martin Woodhall" class="form_element">
+                </div>
+                <div class="form_element">
+                    <label for="at">@</label>
+                    <input type="text" id="at" name="at" placeholder="richGuy_xx" class="form_element">
+                </div>
+                <div class="form_element">
+                    <label for="content">Post Content</label>
+                    <textarea id="content" name="content" class="form_element"></textarea>
+                </div>
+                <div class="form_element">
+                    <label for="likes">Likes</label>
+                    <input type="number" id="likes" name="likes" placeholder="54" class="form_element">
+                </div>
+                <div class="form_element">
+                    <label for="mentions">Mentions</label>
+                    <input type="number" id="mentions" name="mentions" placeholder="3" class="form_element">
+                </div>
+                <button type="submit">Post</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="thread">
+        <ol id="main_thread">
+
+        </ol>
+    </div>
+
+    <script>
+        // import posts
+        const posts = {{data | tojson}};
+        const main_thread = document.getElementById("main_thread");
+
+        function buildPost(post) {
+            const inner = `
+            <div>
+                <p>
+                    <img src="${post.pfp}.json" class="pfp" />
+                    <span class="username">${post.username}</span>
+                    <span class="at">@${post.at}</span>
+                </p>
+                <div class="content_box">
+                <p class="content">${post.content}</p>
+                </div>
+            </div>
+            `;
+            return inner;
+        }
+
+        function insertPost(post) {
+            const primary = document.createElement('li');
+            primary.classList.add('primary');
+
+            const replies = document.createElement('ol');
+            replies.classList.add('secondary');
+            
+            for (let reply in post.replies) {
+                const secondary = document.createElement('li');
+                secondary.innerHTML = buildPost(reply);
+                replies.appendChild(secondary);
+            }
+
+            primary.innerHTML = `
+                <div>${buildPost(post)}</div>
+                <div>${replies}</div>
+                <button class="reply">reply</button>
+            `;
+
+            return primary;
+        }
+
+        for (let post in posts.primary) {
+            const content = insertPost(post);
+            const reply_button = content.querySelector(".reply");
+            reply_button.addEventListener("click", ()=>make_post(content))
+            main_thread.appendChild(content)
+        }
+
+        function make_post(parent, parent_index) {
+            const popup = getElementById("popup_overlay");
+            popup.style.display = "flex";
+
+            const cancel = getElementById("cancel");
+            const form = getElementById("new_post");
+            form.reset()
+
+            cancel.addEventListener("click", ()=>{
+                popup.style.display = "none";
+                return "cancel";
+            });
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                const form_result = new FormData(this);
+                const form_data = Object.fromEntries(form_result.entries());
+                form_data.parent_index = parent_index;
+
+                fetch('/newpost', {
+                    method:"POST",
+                    headers:{"Content-Type":"application/json"},
+                    body:JSON.stringify(form_data)
+                });
+
+                
+
+            });
+        }
+
+    </script>
+</body>
+</html>
