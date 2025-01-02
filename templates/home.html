@@ -3,114 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Preahvihear">
+    <link href="homeStyle.css" rel="stylesheet" type="text/css">
+    <link href="homeJavascript.js" rel="javascript" type="text/javascript">
     <title>Document</title>
-    <style>
-        #popup_overlay {
-            top: 50%;
-            left: 50%;
-            padding: 15px;
-            width: 90%;
-            max-width: 800px;
-            background-color: rgba(0, 160, 255, 0.46);
-            justify-content: center;
-            transform: translate(-50%, -50%);
-            display: none;
-            position: fixed;
-            border-radius: 10px;
-        }
-    
-        #popup {
-            border-right: auto;
-            border-left: auto;
-            width: 250px;
-            padding: 5%;
-            display: flex;
-            background-color: azure;
-            border-radius: 15px;
-            justify-content: space-between;
-        }
-
-        .form_element {
-            font-family: sans-serif;
-            border-radius: 5px;
-            border-color: cadetblue;
-        }
-
-        #cancel {
-            margin-left: auto;
-        }
-
-        label {
-            display: flex;
-            margin-top: 5px;
-        }
-
-        .pfp {
-            width: 35px;
-            height: 35px;
-        }
-
-        .primary {
-            background-color: azure;
-            border-radius: 10px;
-            padding: 10px;
-        }
-
-        .secondary {
-            background-color: cadetblue;
-            padding: 5px;
-            border-radius: 10px;
-        }
-
-        /*.replies {
-            list-style-type: none;
-        }*/
-    </style>
 </head>
 
 <body>
-    <div id="popup_overlay">
-        <div id="popup">
-            <form id="new_post">
-                <div class="form_element">
-                    <label for="pfp">Profile Picture<button id="cancel">X</button></label>
-                    <select id="pfp" name="pfp" class="form_element">
-                        <option>Faen</option>
-                        <option>Friena</option>
-                        <option>Indigo</option>
-                        <option>Mailas</option>
-                        <option>Ise</option>
-                        <option>Other</option>
-                    </select>
-                </div>
-                <div class="form_element">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" placeholder="Martin Woodhall" class="form_element">
-                </div>
-                <div class="form_element">
-                    <label for="at">@</label>
-                    <input type="text" id="at" name="at" placeholder="richGuy_xx" class="form_element">
-                </div>
-                <div class="form_element">
-                    <label for="content">Post Content</label>
-                    <textarea id="content" name="content" class="form_element"></textarea>
-                </div>
-                <div class="form_element">
-                    <label for="likes">Likes</label>
-                    <input type="number" id="likes" name="likes" placeholder="54" class="form_element">
-                </div>
-                <div class="form_element">
-                    <label for="mentions">Mentions</label>
-                    <input type="number" id="mentions" name="mentions" placeholder="3" class="form_element">
-                </div>
-                <button type="submit">Post</button>
-            </form>
-        </div>
+    <div class="make_thread">
+        <button id="make_thread">Make Post</button>
     </div>
 
-    <div class="make_thread">
-        <button id="make_thread">Make post</button>
-    </div>    
+    <div class="boxArea">
+
+        <form id="new_post">
+        <div id="popup">
+        <div class="box">
+            <div class="boxContent">
+
+                <div class="contentLeft">
+                    <div class="row no-gutters">
+                        <div class="col-12 p-0">
+                            <div class="contentSection">
+                                <label for="pfp"><span class="inputLabel"><i class="fa-solid fa-circle-user fa-fw"></i> <strong>Icon</strong></span></label>
+                                <span class="float-end">
+                                    <select id="pfp" name="pfp">
+                                        <option>Select an icon</option>
+                                        <option>Faen</option>
+                                        <option>Friena</option>
+                                        <option>Indigo</option>
+                                        <option>Mailas</option>
+                                        <option>Ise</option>
+                                        <option>Other</option>
+                                    </select>
+                                </span>
+                            </div>
+
+                            <div class="contentSection">
+                                <label for="@"><span class="inputLabel"><i class="fa-solid fa-at fa-fw"></i> <strong>Username</strong></span></label>
+                                <span class="float-end"><input type="text" id="@" name="at" placeholder="ex. positiveInfo"></span>
+                            </div>
+
+                            <div class="contentSection">
+                                <label for="username"><span class="inputLabel"><i class="fas fa-theater-masks fa-fw"></i> <strong>Display Name</strong></span></label>
+                                <span class="float-end"><input type="text" id="username" name="username" placeholder="ex. Pat"></span>
+                            </div>
+
+                            <div class="contentSection">
+                                <label for="likes"><span class="inputLabel"><i class="fa-solid fa-heart fa-fw"></i> <strong>Likes</strong></span></label>
+                                <span class="float-end"><input type="number" id="likes" name="likes" placeholder="0"></span>
+                            </div>
+
+                            <div class="contentSectionBottom">
+                                <label for="mentions"><span class="inputLabel"><i class="fa-solid fa-repeat fa-fw"></i> <strong>Reposts</strong></span></label>
+                                <span class="float-end"><input type="number" id="mentions" name="mentions" placeholder="0"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contentRight">
+                    <div class="row no-gutters">
+                        <div class="col-12 p-0">
+                            <div>
+                                <label for="content"><span><i class="fa-solid fa-pencil"></i> <strong>Content</strong></span></label>
+                                <span class="inputBox"><textarea class="contentPostWriting" id="content" name="content" placeholder="start typing here ! there currently isn't any word limit..."></textarea></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+        </form>
+
+        <div class="buttonRow">
+            <button class="buttonCancel" type="cancel" id="cancel"><i class="fas fa-trash-alt"></i> <span>Cancel</span></button>
+            <button class="buttonPost" type="submit"><i class="fas fa-paper-plane"></i> <span>Post</span></button>
+        </div>
+
+    </div>
 
     <div class="thread">
         <ol id="main_thread">
@@ -118,122 +93,6 @@
         </ol>
     </div>
 
-    <script>
-        // import posts
-        const posts = {{data | tojson}};
-        const main_thread = document.getElementById("main_thread");
-
-        console.log(posts)
-
-        function buildPost(post) {
-            const inner = `
-            <div>
-                <p>
-                    <img src="./static/${post.pfp}.webp" class="pfp" />
-                    <span class="username">${post.username}</span>
-                    <span class="at">@${post.at}</span>
-                </p>
-                <div class="content_box">
-                <p class="content">${post.content}</p>
-                </div>
-            </div>
-            `;
-            return inner;
-        }
-
-        function insertPost(post) {
-            console.log(post);
-            const primary = document.createElement('li');
-            primary.classList.add('primary');
-
-            const replies = document.createElement('ol');
-            replies.id = 'replies';
-            replies.classList.add('replies')
-            
-            for (let reply in post.replies) {
-                const secondary = document.createElement('li');
-                secondary.classList.add("secondary")
-                secondary.innerHTML = buildPost(post.replies[reply]);
-                replies.appendChild(secondary);
-            }
-
-            primary.innerHTML = `
-                <div>${buildPost(post)}</div>
-                <button class="reply">reply</button>
-            `;
-
-            primary.appendChild(replies);
-
-            return primary;
-        }
-
-        function make_post(parent, parent_index) {
-
-            const popup = document.getElementById("popup_overlay");
-            popup.style.display = "flex";
-
-            const cancel = document.getElementById("cancel");
-            const form = document.getElementById("new_post");
-            form.reset()
-
-            cancel.addEventListener("click", ()=>{
-                popup.style.display = "none";
-                return "cancel";
-            });
-
-            function handle_submission(event){
-                event.preventDefault();
-
-                const form_result = new FormData(this);
-                const form_data = Object.fromEntries(form_result.entries());
-                form_data.parent_index = parent_index;
-
-                const content = insertPost(form_data);
-                if (parent_index==-1) {
-                    form_data.replies = [];
-                    fetch('/new_post', {
-                        method:"POST",
-                        headers:{"Content-Type":"application/json"},
-                        body:JSON.stringify(form_data)
-                    });
-                    const content = insertPost(form_data);
-                    const reply_button = content.querySelector(".reply");
-                    reply_button.addEventListener("click", ()=>make_post(content));
-                    main_thread.insertBefore(content,main_thread.firstChild);
-                } else {
-                    fetch('/new_post', {
-                        method:"POST",
-                        headers:{"Content-Type":"application/json"},
-                        body:JSON.stringify(form_data)
-                    });
-                    const secondary = document.createElement('li');
-                    secondary.classList.add("secondary")
-                    secondary.innerHTML = buildPost(form_data);
-                    const replies = parent.querySelector("#replies");
-                    replies.insertBefore(content,replies.firstChild);
-                };
-
-                form.removeEventListener("submit", handle_submission);
-
-                popup.style.display = "none"
-                return "posted"
-
-            };
-
-            form.addEventListener("submit", handle_submission);
-            
-        }
-
-        for (let post in posts.primary) {
-            const content = insertPost(posts.primary[post]);
-            const reply_button = content.querySelector(".reply");
-            reply_button.addEventListener("click", ()=>make_post(content,post));
-            main_thread.appendChild(content);
-        }
-
-        const make_button = document.getElementById("make_thread");
-        make_button.addEventListener("click", ()=>make_post(main_thread,-1))
-
-    </script>
 </body>
+
 </html>
